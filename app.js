@@ -9,40 +9,38 @@ const currencyConversion = (sum, currencyFrom, currencyTo) => {
 	const curr1 = currencyFrom.toLowerCase()
 	const curr2 = currencyTo.toLowerCase()
 
-	if (curr1 !== curr2) {
-		if (curr1 === 'usd' && curr2 === 'rub') {
-			return console.log(
-				`${sum} ${currencyFrom} = ${sum * USD_TO_RUB} ${currencyTo}`
-			)
-		}
-		if (curr1 === 'usd' && curr2 === 'eur') {
-			return console.log(
-				`${sum} ${currencyFrom} = ${sum * USD_TO_EUR} ${currencyTo}`
-			)
-		}
-		if (curr1 === 'eur' && curr2 === 'rub') {
-			return console.log(
-				`${sum} ${currencyFrom} = ${sum * EUR_TO_RUB} ${currencyTo}`
-			)
-		}
-		if (curr1 === 'eur' && curr2 === 'usd') {
-			return console.log(
-				`${sum} ${currencyFrom} = ${sum * EUR_TO_USD} ${currencyTo}`
-			)
-		}
-		if (curr1 === 'rub' && curr2 === 'usd') {
-			return console.log(
-				`${sum} ${currencyFrom} = ${sum * RUB_TO_USD} ${currencyTo}`
-			)
-		}
-		if (curr1 === 'rub' && curr2 === 'eur') {
-			return console.log(
-				`${sum} ${currencyFrom} = ${sum * RUB_TO_EUR} ${currencyTo}`
-			)
-		}
-	} else return console.log('Валюта должна различаться')
+	if (curr1 === curr2) {
+		console.log('Валюта должна различаться')
+		return
+	}
 
-	return console.log('Некорректные данные')
+	let result
+
+	switch (`${curr1}_${curr2}`) {
+		case 'usd_rub':
+			result = sum * USD_TO_RUB
+			break
+		case 'usd_eur':
+			result = sum * USD_TO_EUR
+			break
+		case 'eur_rub':
+			result = sum * EUR_TO_RUB
+			break
+		case 'eur_usd':
+			result = sum * EUR_TO_USD
+			break
+		case 'rub_usd':
+			result = sum * RUB_TO_USD
+			break
+		case 'rub_eur':
+			result = sum * RUB_TO_EUR
+			break
+		default:
+			console.log('Некорректные данные')
+			return
+	}
+
+	console.log(`${sum} ${currencyFrom} = ${result} ${currencyTo}`)
 }
 
 currencyConversion(100, 'usd', 'rub')
