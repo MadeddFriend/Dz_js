@@ -5,4 +5,13 @@ const getEncryptionWord = word => {
 	return end + body + start
 }
 
-console.log(getEncryptionWord('password'))
+const getDecryptionWord = encryptedWord => {
+	const end = encryptedWord.slice(0, 2)
+	const start = encryptedWord.slice(-2)
+	const body = encryptedWord.slice(2, -2)
+	const reversedBody = [...body].reverse().join('')
+	return start + reversedBody + end
+}
+
+console.log(getEncryptionWord('developer'))
+console.log(getDecryptionWord(getEncryptionWord('developer')))
